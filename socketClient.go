@@ -9,10 +9,15 @@ import (
 	"time"
 )
 
+var port string
+
+func init() {
+	flag.StringVar(&port, "port", "60000", "Specify port to connect")
+}
+
 func main() {
-	var port = flag.String("port", "6000", "Specify connect port.")
 	flag.Parse()
-	var ADDRESS = net.JoinHostPort("127.0.0.1", *port)
+	var ADDRESS = net.JoinHostPort("127.0.0.1", port)
 	receiveBuf := make([]byte, 10, 16)
 	conn, err := net.Dial("tcp4", ADDRESS)
 	dealErr(err)
